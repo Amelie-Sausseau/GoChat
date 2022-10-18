@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -32,6 +33,7 @@ class LoginController extends Controller
      * Create a new controller instance.
      *
      * @return void
+     * @return \App\Models\User
      */
     public function __construct()
     {
