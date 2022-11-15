@@ -24,7 +24,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ route('home') }}">
                     GoChat!
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -34,10 +34,6 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -58,9 +54,8 @@
                             <li class="nav-item">
                                 <div style="display: flex; align-items: center;">
                                     <img src="{{ asset('storage/uploads/' . Auth::user()->image) }}"
-                                        style="width:30px; border-radius: 100%;" alt="">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" role="button"
-                                        data-bs-toggle="dropdown" aria-haspopup="false" aria-expanded="false" v-pre>
+                                        style="width:30px; height: 30px; border-radius: 100%;" alt="">
+                                    <a href="{{ route('dashboard') }}" id="navbarDropdown" class="nav-link">
                                         {{ Auth::user()->pseudo }}
                                     </a>
                                 </div>

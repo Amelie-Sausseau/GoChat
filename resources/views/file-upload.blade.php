@@ -30,6 +30,6 @@
 
         </div>
         <a type="button" class="btn btn-outline-secondary" style="margin-top: 2rem"
-            href="{{ route('home') }}">{{ __('Retour') }}</a>
+            href="{{ route('dashboard') }}">{{ __('Retour') }}</a>
     </div>
 @endsection

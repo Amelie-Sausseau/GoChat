@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class PostController extends Controller
 {
@@ -23,7 +28,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view("posts.create");
     }
 
     /**
@@ -34,7 +39,33 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $userId = Auth::user()->id;
+
+        $this->validate($request, [
+            'message' => 'required',
+            'titre' => 'string',
+            'image' => 'nullable|mimes:png,gif,jpg,jpeg|max:4000',
+            'tags' => 'string',
+        ]);
+
+        // 2. On upload l'image
+        $fileName = $request->image->getClientOriginalName();
+        $filePath = 'uploads/' . $fileName;
+
+        $path = Storage::disk('public')->put($filePath, file_get_contents($request->image));
+        $path = Storage::disk('public')->url($path);
+
+        // 3. On enregistre les informations du Post
+        Post::create([
+            'content' => $request->message,
+            'titre' => $request->titre,
+            'image' => $fileName,
+            'tags' => $request->tags,
+            'user_id' => $userId,
+        ]);
+
+        return back()
+            ->with('success', 'Chat ajouté !');
     }
 
     /**
@@ -56,7 +87,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::getPost($id);
+        return view("posts.edit", ['post' => $post]);
     }
 
     /**
@@ -68,7 +100,39 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $updatedPost = Post::findOrFail($id);
+
+        $userId = Auth::user()->id;
+
+        $this->validate($request, [
+            'message' => 'required',
+            'titre' => 'string',
+            'image' => 'nullable|mimes:png,gif,jpg,jpeg|max:4000',
+            'tags' => 'string',
+        ]);
+
+        if ($request->image) {
+
+        $fileName = $request->image->getClientOriginalName();
+        $filePath = 'uploads/' . $fileName;
+
+        $path = Storage::disk('public')->put($filePath, file_get_contents($request->image));
+        $path = Storage::disk('public')->url($path);
+
+        $updatedPost->update([
+            'image' => $fileName,
+        ]);
+        }
+
+        $updatedPost->update([
+            'content' => $request->message,
+            'titre' => $request->titre,
+            'tags' => $request->tags,
+            'user_id' => $userId,
+        ]);
+
+        return back()
+            ->with('success', 'Modifications enregistrées');
     }
 
     /**
@@ -79,6 +143,18 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        if (Auth::user()->id == $post->user_id) {
+            DB::delete('delete from posts where id = ?', [$id]);
+
+            return redirect()->route('home')
+                ->with('success', 'Chat supprimé !');
+        }
+        else {
+            return redirect()->route('home')
+                ->with('message', 'Vous n\'avez pas les droits!');
+        }
     }
+
 }

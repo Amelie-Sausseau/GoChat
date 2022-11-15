@@ -1,25 +1,29 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| User Factories
-|--------------------------------------------------------------------------
-|
-| Here you may define all of your model factories. Model factories give
-| you a convenient way to create models for testing and seeding your
-| database. Just tell the factory how a default model should look.
-|
-*/
+namespace Database\Factories;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
-    static $password;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-    return [
-        'firstname' => $faker->firstname,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
-        'image'  => str_random(10),
-    ];
-});
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ */
+class UserFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition()
+    {
+        return [
+            'pseudo' => fake()->name(),
+            'image' => 'default_user.jpg',
+            'email' => fake()->unique()->safeEmail(),
+            'password' => Hash::make(fake()->name()),
+            'remember_token' => Str::random(10),
+        ];
+    }
+}

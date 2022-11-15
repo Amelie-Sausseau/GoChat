@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -31,8 +33,21 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    public function home()
+    {
+        //On récupère tous les Post
+        $posts = Post::latest()->get();
+        // On transmet les Post à la vue
+        return view("home", compact("posts"));
+    }
+
+    /**
+     * Show the user dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function isConnected()
     {
-        return view('home');
+        return view('dashboard');
     }
 }

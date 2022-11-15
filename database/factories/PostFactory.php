@@ -1,22 +1,28 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Post Factories
-|--------------------------------------------------------------------------
-|
-| Here you may define all of your model factories. Model factories give
-| you a convenient way to create models for testing and seeding your
-| database. Just tell the factory how a default model should look.
-|
-*/
+namespace Database\Factories;
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Post::class, function (Faker\Generator $faker) {
+use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
 
-    return [
-        'content' => str_random(500),
-        'tags' => str_random(50),
-        'image'  => str_random(10),
-    ];
-});
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
+ */
+class PostFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition()
+    {
+        return [
+            'content' => $this->faker->paragraph(),
+            'image' => 'default_user.jpg',
+            'tags' => $this->faker->words(3, true),
+            'user_id' => rand(1, User::count()),
+            'titre' => $this->faker->sentence()
+        ];
+    }
+}

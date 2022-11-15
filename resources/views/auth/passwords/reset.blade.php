@@ -80,7 +80,7 @@
                     </form>
                 </div>
             </div>
-            <a type="button" class="btn btn-outline-secondary" style="margin-top: 2rem" href="{{ route('home') }}">{{ __('Retour') }}</a>
+            <a type="button" class="btn btn-outline-secondary" style="margin-top: 2rem" href="{{ route('dashboard') }}">{{ __('Retour') }}</a>
         </div>
     </div>
 </div>
