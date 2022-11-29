@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-header">{{ __('Ajouter un commentaire au Chat de ' . $post->getAuthor($post->user_id) ) }}</div>
+                    <div class="card-header" style="background-color: #1987543b;">{{ __('Ajouter un commentaire au Chat de ' . $post->user->pseudo) }}</div>
                     <div class="card-body">
                         <form action="{{ route('comments.store', $post->id) }}" enctype="multipart/form-data" method="post">
                             @csrf
@@ -65,7 +65,7 @@
 
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-dark">
+                                    <button type="submit" class="btn btn-success">
                                         {{ __('Ajouter') }}
                                     </button>
                                 </div>
@@ -73,7 +73,7 @@
                         </form>
                     </div>
                 </div>
-                <a type="button" class="btn btn-outline-secondary" style="margin-top: 2rem"
+                <a type="button" class="btn btn-outline-success" style="margin-top: 2rem"
                     href="{{ route('home') }}">{{ __('Retour') }}</a>
             </div>
         </div>

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Réinitalisation du mot de passe') }}</div>
+                <div class="card-header" style="background-color: #1987543b;">{{ __('Réinitalisation du mot de passe') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -72,7 +72,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-success">
                                     {{ __('Réinitialiser le mot de passe') }}
                                 </button>
                             </div>
@@ -80,7 +80,7 @@
                     </form>
                 </div>
             </div>
-            <a type="button" class="btn btn-outline-secondary" style="margin-top: 2rem" href="{{ route('dashboard') }}">{{ __('Retour') }}</a>
+            <a type="button" class="btn btn-outline-success" style="margin-top: 2rem" href="{{ route('dashboard') }}">{{ __('Retour') }}</a>
         </div>
     </div>
 </div>

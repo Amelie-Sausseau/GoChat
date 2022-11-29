@@ -104,6 +104,9 @@ class CommentController extends Controller
     public function edit($id)
     {
         $comment = Comment::getComment($id);
+
+        $this->authorize('update', $comment);
+
         return view("comments.edit", ['comment' => $comment]);
     }
 
@@ -117,6 +120,8 @@ class CommentController extends Controller
     public function update(Request $request, $id)
     {
         $updatedComment = Comment::findOrFail($id);
+
+        $this->authorize('update', $updatedComment);
 
         $userId = Auth::user()->id;
 
@@ -159,7 +164,9 @@ class CommentController extends Controller
     {
         $comment = Comment::findOrFail($id);
 
-        if (Auth::user()->id == $comment->user_id) {
+        $this->authorize('delete', $comment);
+
+        if (Auth::user()->id == $comment->user_id || Auth::user()->id == isAdmin()) {
             DB::delete('delete from comments where id = ?', [$id]);
 
             return redirect()->route('home')

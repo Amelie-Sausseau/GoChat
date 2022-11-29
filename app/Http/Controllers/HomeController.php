@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
 
+
 class HomeController extends Controller
 {
     /**
@@ -36,7 +37,7 @@ class HomeController extends Controller
     public function home()
     {
         //On récupère tous les Post
-        $posts = Post::latest()->get();
+        $posts = Post::latest()->paginate(10);
         // On transmet les Post à la vue
         return view("home", compact("posts"));
     }

@@ -24,6 +24,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
+                <img src="/storage/uploads/GoChat.png" width="35px" alt="">
                 <a class="navbar-brand" href="{{ route('home') }}">
                     GoChat!
                 </a>
@@ -34,6 +35,13 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    @auth
+                    <form class="d-flex" role="search" action="{{ route('posts.search') }}" method="get">
+                        <input class="form-control me-2" type="search" name="search" placeholder="Recherche" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Rechercher</button>
+                    </form>
+                    @endauth
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">

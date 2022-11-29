@@ -19,6 +19,7 @@ class Comment extends Model
         return $this->belongsTo(Post::class);
     }
 
+    protected $with = ['user'];
     
     /**
      * Get a comment
@@ -30,4 +31,5 @@ class Comment extends Model
         $comment = Comment::findOrFail($id);
         return $comment;
     }
+
 }

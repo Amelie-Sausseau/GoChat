@@ -41,4 +41,10 @@ class User extends Authenticatable
     public function comments() {
         return $this->hasMany(Comment::class);
     }
+
+    public function isAdmin() {
+        if ($this->role_id == 1) {
+            return true;
+        }
+    }
 }

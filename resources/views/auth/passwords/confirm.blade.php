@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Confirmer le mot de passe') }}</div>
+                <div class="card-header" style="background-color: #1987543b;">{{ __('Confirmer le mot de passe') }}</div>
 
                 <div class="card-body">
                     {{ __('Veuillez confirmer le mot de passe avant de continuer') }}
@@ -29,7 +29,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-success">
                                     {{ __('Confirmez le mot de passe') }}
                                 </button>
 

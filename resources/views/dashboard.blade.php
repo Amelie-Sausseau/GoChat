@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Tableau de bord') }}</div>
+                    <div class="card-header" style="background-color: #1987543b;">{{ __('Tableau de bord') }}</div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -19,15 +19,15 @@
                                 style="width:50px; height: 50px; border-radius: 50px;" alt="">
                             <h2>{{ __('Bienvenue') }} {{ Auth::user()->pseudo }} {{ __('!') }}</h2>
                         </div>
-                        <a type="button" class="btn btn-outline-secondary"
+                        <a type="button" class="btn btn-outline-success"
                             href="{{ route('auth.modify', Auth::user()->id) }}">{{ __('Modifier mes informations') }}</a>
-                        <a type="button" class="btn btn-outline-secondary"
+                        <a type="button" class="btn btn-outline-success"
                             href="{{ route('password.reset', app()->getLocale()) }}">{{ __('Modifier mon mot de passe') }}</a>
                         @if (is_null(Auth::user()->image))
-                            <a type="button" class="btn btn-outline-secondary"
+                            <a type="button" class="btn btn-outline-success"
                                 href="{{ route('get.fileupload') }}">{{ __('Ajouter une photo de profil') }}</a>
                         @else
-                            <a type="button" class="btn btn-outline-secondary"
+                            <a type="button" class="btn btn-outline-success"
                                 href="{{ route('get.fileupload') }}">{{ __('Modifier ma photo de profil') }}</a>
                         @endif
                     </div>

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Modifier mes données') }}</div>
+                <div class="card-header" style="background-color: #1987543b;">{{ __('Modifier mes données') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('post.modify') }}">
@@ -41,7 +41,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-success">
                                     {{ __('Enregistrer') }}
                                 </button>
                             </div>
@@ -49,7 +49,7 @@
                     </form>
                 </div>
             </div>
-            <a type="button" class="btn btn-outline-secondary" style="margin-top: 2rem" href="{{ route('dashboard') }}">{{ __('Retour') }}</a>
+            <a type="button" class="btn btn-outline-success" style="margin-top: 2rem" href="{{ route('dashboard') }}">{{ __('Retour') }}</a>
         </div>
     </div>
 </div>

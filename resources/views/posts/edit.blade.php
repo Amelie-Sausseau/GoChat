@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Modifier un Chat') }}</div>
+                    <div class="card-header" style="background-color: #1987543b;">{{ __('Modifier un Chat') }}</div>
 
                     <div class="card-body">
                         <form action="{{ route('posts.update', $post->id) }}" method="post" enctype="multipart/form-data">

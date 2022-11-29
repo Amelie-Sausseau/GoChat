@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 
 class PostController extends Controller
 {
@@ -88,6 +89,9 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::getPost($id);
+
+        $this->authorize('update', $post);
+       
         return view("posts.edit", ['post' => $post]);
     }
 
@@ -100,6 +104,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $updatedPost = Post::findOrFail($id);
 
         $userId = Auth::user()->id;
@@ -145,6 +150,8 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
 
+        $this->authorize('delete', $post);
+
         if (Auth::user()->id == $post->user_id) {
             DB::delete('delete from posts where id = ?', [$id]);
 
@@ -156,5 +163,27 @@ class PostController extends Controller
                 ->with('message', 'Vous n\'avez pas les droits!');
         }
     }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function searchResult(Request $request)
+    {
+        $request->validate([
+            'search' => 'required',
+        ]);
+
+        $search = $request->input('search');
+
+        $post = Post::where('posts.tags', 'LIKE', "%$search%")
+            ->orWhere('posts.content', 'LIKE', "%$search%")
+            ->with('user', 'comments.user')
+            ->latest()->paginate(10);
+
+        return view("posts.search", ['posts' => $post, 'search' => $search]);
+    }
+
 
 }

@@ -19,7 +19,7 @@
                         <input type="file" name="file" class="form-control" />
                     </div>
                     <div class="col-md-6">
-                        <button type="submit" class="btn btn-dark">Valider</button>
+                        <button type="submit" class="btn btn-success">Valider</button>
                     </div>
                 </div>
             </form>
@@ -29,7 +29,7 @@
             @endif
 
         </div>
-        <a type="button" class="btn btn-outline-secondary" style="margin-top: 2rem"
+        <a type="button" class="btn btn-outline-success" style="margin-top: 2rem"
             href="{{ route('dashboard') }}">{{ __('Retour') }}</a>
     </div>
 @endsection

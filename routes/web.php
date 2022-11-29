@@ -39,6 +39,7 @@ Route::post('/post/create', [App\Http\Controllers\PostController::class, 'store'
 Route::delete('/post/delete/{id}', [App\Http\Controllers\PostController::class, 'destroy'])->name('posts.destroy');
 Route::get('/post/edit/{id}', [App\Http\Controllers\PostController::class, 'edit'])->name('posts.edit');
 Route::put('/post/update/{id}', [App\Http\Controllers\PostController::class, 'update'])->name('posts.update');
+Route::get('/post/search', [App\Http\Controllers\PostController::class, 'searchResult'])->name('posts.search');
 
 Route::get('/comment/add/{id}', [App\Http\Controllers\CommentController::class, 'create'])->name('comments.add');
 Route::post('/comment/add/{id}', [App\Http\Controllers\CommentController::class, 'store'])->name('comments.store');

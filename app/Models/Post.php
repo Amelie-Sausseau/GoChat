@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class Post extends Model
 {
@@ -20,16 +21,9 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
-    /**
-     * Get a post author pseudo
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function getAuthor($id) {
-        $author = User::findOrFail($id);
-        return $author->pseudo;
-    }
+    // je charge automatiquement l'utilisateur à chaque fois que je récupère un message
+    protected $with = ['user'];
+
 
     /**
      * Get a post
@@ -52,6 +46,10 @@ class Post extends Model
         $comment = DB::select('select * from comments where post_id = ?', [$id]);
 
         return $comment;
+    }
+
+    public static function formatDate($date) {
+        return Carbon::parse($date)->format('d-m-Y à H:i');
     }
 
 }

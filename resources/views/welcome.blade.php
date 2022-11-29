@@ -64,6 +64,10 @@
         .m-b-md {
             margin-bottom: 30px;
         }
+
+        .pagination {
+            --bs-pagination-active-bg: #198754 !important;
+        }
     </style>
 </head>
 
@@ -71,7 +75,7 @@
     <div class="flex-center position-ref full-height">
         <div class="content">
             <div class="title m-b-md">
-                GoChat!
+                <img src="/storage/uploads/GoChat.png" width="400px" alt="">
             </div>
             @if (Route::has('login'))
                 <div class="links">
