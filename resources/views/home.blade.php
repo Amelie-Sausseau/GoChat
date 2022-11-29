@@ -20,7 +20,7 @@
                                         <form action="{{ route('posts.destroy', $post->id) }}" method="post">
                                             @csrf
                                             @method('delete')
-                                            <button style="max-width: 100px;" class="btn btn-danger">X</button>
+                                            <button style="max-width: 100px;" class="btn btn-dark">X</button>
                                         </form>
                                     @endcan
                                     @can('delete', $post)
@@ -63,7 +63,7 @@
                                         <form action="{{ route('comments.destroy', $comment->id) }}" method="post">
                                             @csrf
                                             @method('delete')
-                                            <button style="max-width: 100px;" class="btn btn-danger">X</button>
+                                            <button style="max-width: 100px;" class="btn btn-dark">X</button>
                                         </form>
                                     @endcan
                                     @can('update', $comment)

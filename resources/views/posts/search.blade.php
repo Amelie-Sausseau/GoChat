@@ -13,7 +13,7 @@
                 @foreach ($posts as $post)
                     <div class="card text-center" style="margin-bottom: 1rem;">
                         <div class="card-header text-muted" style="background-color: #1987543b;">
-                            <span class="badge text-bg-info"
+                            <span class="badge text-bg-success"
                                 style="display: flex; width: fit-content;">{{ $post->tags }}</span>
                             <div style="display: flex; align-items: self-end; justify-content: space-between;">
                                 <h3 style="text-align: center !important;">{{ $post->titre }}</h3>
@@ -22,7 +22,7 @@
                                         <form action="{{ route('posts.destroy', $post->id) }}" method="post">
                                             @csrf
                                             @method('delete')
-                                            <button style="max-width: 100px;" class="btn btn-danger">X</button>
+                                            <button style="max-width: 100px;" class="btn btn-dark">X</button>
                                         </form>
                                     @endcan
                                     @can('delete', $post)
@@ -37,7 +37,7 @@
                         <div class="card-body">
                             <p class="card-text">{{ $post->content }}</p>
                             <p style="font-weight: bold;">{{ count($post->getComments($post->id)) }} commentaires</p>
-                            <a href="{{ route('comments.add', $post->id) }}" class="btn btn-dark">Commenter</a>
+                            <a href="{{ route('comments.add', $post->id) }}" class="btn btn-success">Commenter</a>
                         </div>
                         <div class="card-footer text-muted">
                             Publié le {{ $post->formatDate($post->created_at) }} par

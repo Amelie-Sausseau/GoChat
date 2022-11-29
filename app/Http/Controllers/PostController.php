@@ -13,16 +13,6 @@ use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 class PostController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -67,17 +57,6 @@ class PostController extends Controller
 
         return back()
             ->with('success', 'Chat ajouté !');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -153,7 +132,9 @@ class PostController extends Controller
         $this->authorize('delete', $post);
 
         if (Auth::user()->id == $post->user_id) {
-            DB::delete('delete from posts where id = ?', [$id]);
+            //DB::delete('delete from posts where id = ?', [$id]);
+
+            $post->delete();
 
             return redirect()->route('home')
                 ->with('success', 'Chat supprimé !');
@@ -177,9 +158,9 @@ class PostController extends Controller
 
         $search = $request->input('search');
 
-        $post = Post::where('posts.tags', 'LIKE', "%$search%")
-            ->orWhere('posts.content', 'LIKE', "%$search%")
-            ->with('user', 'comments.user')
+        $post = Post::where('posts.content', 'LIKE', "%$search%")
+            ->orWhere('posts.tags', 'LIKE', "%$search%")
+            ->orWhere('posts.titre', 'LIKE', "%$search%")
             ->latest()->paginate(10);
 
         return view("posts.search", ['posts' => $post, 'search' => $search]);
